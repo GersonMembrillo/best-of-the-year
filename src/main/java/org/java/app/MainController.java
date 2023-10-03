@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class MainController {
@@ -26,6 +27,29 @@ public class MainController {
         songs.add(new Song(3, "Hey Jude"));
         return songs;
     }
+    
+    @GetMapping("/movies/{id}")
+	public String getMovieID(@PathVariable int id, Model model) {
+		
+		Movie movie = getBestMovies().stream()
+							.filter(m -> m.getId() == id)
+						.findFirst().get();
+		String movieTitle = movie.getTitle();
+		
+		model.addAttribute("movieTitle", movieTitle);
+		
+		return "movie";
+	}
+	@GetMapping("/songs/{id}")
+	public String getSongID(@PathVariable int id, Model model) {
+		
+		Song song = getBestSongs().get(id);
+		String songTitle = song.getTitle();
+		
+		model.addAttribute("songTitle", songTitle);
+		
+		return "song";
+	}
 
     @GetMapping("/")
     public String test(Model model) {
