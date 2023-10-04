@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Song: [[${songTitle}]]</h1>
+	
+	<th:block th:replace="nav"/>
+	<div class="text-center">
+		<h1 class="m-4">Song: [[${songTitle}]]</h1>
+	</div>
+	
 </body>
 </html>

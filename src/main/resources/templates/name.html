@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Test 1</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+
+  <title>Test 1</title>
 </head>
-<body>
-	<h1>Best of the Year by [[${name}]]</h1>
+<body class="bg-light">
+	
+	<th:block th:replace="nav"/>
+	<div class="text-center ">
+    <h1 class="m-4" th:text="'Best of the Year - Powered by ' + ${name}"/>
+    <br>
+    <div class="d-flex justify-content-center">
+			
+		    <div class="card col-6">
+  <img src="https://6.soompi.io/wp-content/uploads/image/20230626024850_Blue-Dragon-Series-Awards.jpeg?s=900x600&e=t"
+   class="card-img-top" alt="img">
+  <div class="card-body">
+    <h5 class="card-title">Yeah Baby!</h5>
+    <p class="card-text">Basato su pareri personali e confronti con altri Best of the Year di terze parti, quali Empire, Rolling Stones, Movie Awards, Times, Variety, ecc</p>
+  </div>
+</div>
+	    </div>
+    </div>
+
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

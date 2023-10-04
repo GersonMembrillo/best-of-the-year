@@ -40,16 +40,18 @@ public class MainController {
 		
 		return "movie";
 	}
-	@GetMapping("/songs/{id}")
-	public String getSongID(@PathVariable int id, Model model) {
-		
-		Song song = getBestSongs().get(id);
-		String songTitle = song.getTitle();
-		
-		model.addAttribute("songTitle", songTitle);
-		
-		return "song";
-	}
+    @GetMapping("/songs/{id}")
+    public String getSongID(@PathVariable int id, Model model) {
+
+        Song song = getBestSongs().stream()
+            .filter(s -> s.getId() == id)
+            .findFirst().get();
+        String songTitle = song.getTitle();
+
+        model.addAttribute("songTitle", songTitle);
+
+        return "song";
+    }
 
     @GetMapping("/")
     public String test(Model model) {
@@ -61,17 +63,29 @@ public class MainController {
     }
 
     @GetMapping("/movies")
-    public String movies(Model model) {
-        String moviesList = getBestMovies().stream().map(m -> m.getTitle()).collect(Collectors.joining(", "));
-        model.addAttribute("movies", moviesList);
-        return "movies";
+//    public String movies(Model model) {
+//        String moviesList = getBestMovies().stream().map(m -> m.getTitle()).collect(Collectors.joining(", "));
+//        model.addAttribute("movies", moviesList);
+//        return "movies";
+//    }
+    
+    public List<Movie> movies(Model model) {
+        List<Movie> movies = getBestMovies();
+        model.addAttribute("movies", movies);
+        return movies;
     }
 
     @GetMapping("/songs")
-    public String songs(Model model) {
-        String songsList = getBestSongs().stream().map(s -> s.getTitle()).collect(Collectors.joining(", "));
-        model.addAttribute("songs", songsList);
-        return "songs";
+//    public String songs(Model model) {
+//        String songsList = getBestSongs().stream().map(s -> s.getTitle()).collect(Collectors.joining(", "));
+//        model.addAttribute("songs", songsList);
+//        return "songs";
+//    }
+    
+    public List<Song> songs(Model model) {
+        List<Song> songs = getBestSongs();
+        model.addAttribute("songs", songs);
+        return songs;
     }
     
     

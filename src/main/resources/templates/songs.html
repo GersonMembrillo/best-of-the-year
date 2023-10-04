@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
 <title>Songs</title>
 </head>
 <body>
-
-<h1>Best Songs</h1>
-
-<ul>
-    <li th:each="song : ${songs}" th:text="${song}"></li>
-</ul>
-
+	
+	<th:block th:replace="nav"/>
+	<div class="text-center">
+		<h1 class="m-4">Best Songs</h1>
+		<div class="d-flex justify-content-center">
+			<ul class="list-unstyled list-group col-6">
+			    <li th:each="song : ${songs}" th:object="${song}" class="list-group-item">
+					<a class="text-decoration-none text-black" th:href="@{/songs/{id}(id=*{id})}">
+						[[*{title}]]				
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
